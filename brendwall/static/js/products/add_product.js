@@ -1,5 +1,7 @@
 let formNode = document.querySelector("#product-form");
 let tableContentNode = document.querySelector("#table-content");
+let successNode = document.querySelector("#success");
+let errorNode = document.querySelector("#error");
 
 
 function loadProductsTable() {
@@ -51,7 +53,7 @@ function addProduct(data) {
             },
             body: data,
         }).then((response) => response.json()
-            .then((data) => ({ status: response.status, body: data })))
+            .then((result) => ({ status: response.status, body: result })))
             .then((result) => {
                 if (result.status == 200) {
                     tableContentNode.innerHTML = `
@@ -60,8 +62,21 @@ function addProduct(data) {
                         <td>${data.get("description")}</td>
                         <td>${data.get("price")}</td>
                       </tr>
-                ` + tableContentNode.innerHTML;
+                    ` + tableContentNode.innerHTML;
+                    successNode.innerHTML = result.body["message"];
+                    successNode.classList.remove("d-none");
+                    errorNode.classList.add("d-none");
+                } else {
+                    errorNode.innerHTML = result.body["message"];
+                    errorNode.classList.remove("d-none");
+                    successNode.classList.add("d-none");
                 }
+                setTimeout(() => {
+                    successNode.innerHTML = '';
+                    successNode.classList.add("d-none");
+                    errorNode.innerHTML = '';
+                    errorNode.classList.add("d-none");
+                }, 5000);
             });
     } catch (error) {
         console.error(error);

@@ -27,16 +27,6 @@
             </tr>
           </thead>
           <tbody id="table-content">
-            <tr>
-              <td>Продукт 1</td>
-              <td>Первый продукт</td>
-              <td>100</td>
-            </tr>
-            <tr>
-              <td>Продукт 2</td>
-              <td>Второй продукт</td>
-              <td>200</td>
-            </tr>
           </tbody>
         </table>
       </div>
@@ -57,6 +47,8 @@
             <input type="number" class="form-control" id="price" name="price" min="1" required>
           </div>
           <button type="submit" class="btn btn-primary mb-3">Добавить</button>
+          <div id="success" class="d-none alert alert-success" role="alert"></div>
+          <div id="error" class="d-none alert alert-danger" role="alert"></div>
         </form>
       </div>
     </div>
