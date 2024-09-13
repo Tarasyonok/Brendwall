@@ -1,4 +1,5 @@
 from django.http import JsonResponse
+from django.shortcuts import render
 
 from products.models import Product
 from products.forms import ProductForm
@@ -15,3 +16,7 @@ def products_api(request):
 
     else:
         return JsonResponse(list(Product.objects.all().values()), safe=False)
+
+
+def add_product(request):
+    return render(request, "add_product.html")
